@@ -3,7 +3,7 @@ from app.graph.workflow import app
 def main():
     result = app.invoke({
         "messages": [
-            ("user", "Suggest me some Playboi Carti songs where Travis Scott is featured artist")
+            ("user", "Suggest me similar artist to Playboi Carti")
         ]
     })
 
