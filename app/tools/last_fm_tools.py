@@ -33,7 +33,7 @@ def get_similar_artists(query: str) -> str:
     result = [
         {
             "artist": str(similar.item.name),
-            "match": str(similar.match)
+            "match": str(similar.match * 100)
         }
         for similar in similar_artists
     ]
