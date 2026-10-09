@@ -24,7 +24,7 @@ def search_music(query : str,search_type : str) -> str:
     params = {
         "query" : musicbrainz_query,
         "fmt" : "json",
-        "limit" : 3
+        "limit" : 4
     }
     
     headers = {

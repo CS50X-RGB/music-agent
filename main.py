@@ -5,7 +5,7 @@ def main():
 
     result = app.invoke({
         "messages": [
-            ("user", "Give me Playboi Carti songs and artists similar to him")
+            ("user", "Give me a playlist for Travis Scott and Playboi Carti")
         ],
         "plan": None,
         "results": []

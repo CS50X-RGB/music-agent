@@ -11,3 +11,16 @@ class MusicTask(BaseModel):
 
 class MusicPlan(BaseModel):
     tasks : list[MusicTask]
+
+
+class PlaylistSong(BaseModel):
+    title : str
+    artist : str
+    reason : str
+    video_id : str | None = None
+    url : str | None = None
+    embed_url : str | None = None
+    
+class Playlist(BaseModel):
+    name: str
+    songs : list[PlaylistSong]
