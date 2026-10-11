@@ -41,7 +41,7 @@ def youtube_agent_node(state : MusicState):
     playlist = state["playlist"]
     
     updated_playlist = youtube_agent(playlist)
-    
+    print(updated_playlist)
     return  {
         "playlist" : updated_playlist
     }
