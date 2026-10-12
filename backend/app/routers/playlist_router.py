@@ -19,7 +19,7 @@ def create_playlist(
     return service.create_playlist(db,user.id,data)
 
 @router.get("/my")
-def get_my_playlists(db:Session,user : User = Depends(get_current_user)):
+def get_my_playlists(db:Session = Depends(get_db),user : User = Depends(get_current_user)):
     playlists = service.get_playlists_by_user_id(db,user.id)
     if len(playlists) == 0:
         raise HTTPException(

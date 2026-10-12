@@ -1,3 +1,45 @@
-.env
-.venv
-__pycache__
+# Environment variables and secrets
+.env*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Node dependencies
+/frontend-agent/node_modules/
+/frontend-agent/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Testing
+/coverage
+
+# Next.js
+/frontend-agent/.next/
+/frontend-agent/out/
+
+# Production
+/build
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Vercel
+.vercel/
+
+# TypeScript
+*.tsbuildinfo
+/frontend-agent/next-env.d.ts
