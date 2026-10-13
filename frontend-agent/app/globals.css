@@ -1,5 +1,6 @@
 
 @import "tailwindcss";
+@import "@heroui/styles"; 
 
 :root {
   --background: #090B0A;
