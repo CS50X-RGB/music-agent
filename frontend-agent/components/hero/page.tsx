@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section className="flex min-h-[70vh] flex-col items-center justify-center gap-6 px-4 text-center">
       <h1 className="max-w-4xl text-4xl font-bold tracking-tight text-accent sm:text-5xl md:text-6xl">
-        Describe the artist or vibe.
+        Describe the <span className="text-white">artist or vibe.</span>
         <span className="block mt-2">
           We&apos;ll build your playlist.
         </span>
@@ -18,7 +18,7 @@ export default function Hero() {
       <Button
         size="lg"
         // color="primary"
-        className="font-semibold"
+        className="font-semibold text-black"
         // onPress={() => {
         //   window.location.href = "/login";
         // }}
