@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={manrope.variable}>
       <body
-        className="min-h-full flex flex-col p-8"
+        className="min-h-full flex flex-col"
         suppressHydrationWarning
       >
         <Navbar>

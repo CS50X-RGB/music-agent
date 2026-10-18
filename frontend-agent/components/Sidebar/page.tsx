@@ -1,6 +1,8 @@
 import { IoMdHome } from "react-icons/io";
 import { IoSave } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
+import Link from "next/link";
+import { Avatar } from '@heroui/react';
 
 type Link = {
     name: string,
@@ -23,22 +25,47 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
         }
     ]
     return (
-        <>
-            <div className="flex flex-col items-center gap-2 w-1/8 h-[90vh] rounded-2xl absolute left-20 z-20 bg-[rgba(199,243,107)]">
-                <h1 className="text-xl font-bold text-black p-8">
-                    [Music Agent]
-                </h1>
-                {links.map((m: Link, index: number) => {
-                    const Icon = m.icon;
-                    return (
-                        <div key={index} className="flex flex-row justify-around text-black gap-4 text-xl">
-                            {Icon}
-                            <h1 className="text-black">{m.name}</h1>
-                        </div>
-                    );
-                })}
+
+        <div className="flex flex-row w-full min-h-screen">
+            <div className="flex flex-col items-center justify-between w-64 h-[90vh] rounded-2xl fixed left-20 top-[5vh] z-20 bg-[rgb(199,243,107)] py-6">
+
+                <div className="flex flex-col gap-4 w-full px-4">
+                    <h1 className="text-xl font-bold text-black px-4 py-4">
+                        Music Agent
+                    </h1>
+
+                    <div className="flex flex-col gap-2">
+                        {links.map((m: Link, index: number) => {
+                            const Icon = m.icon;
+
+                            return (
+                                <Link
+                                    href="/"
+                                    key={index}
+                                    className="flex flex-row p-4 rounded-2xl items-center text-black gap-4 text-lg hover:bg-black hover:text-[rgb(199,243,107)] transition-colors"
+                                >
+                                    {Icon}
+                                    <span>{m.name}</span>
+                                </Link>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                <div className="flex flex-row gap-3 items-center text-black px-4">
+                    <Avatar>
+                        <Avatar.Fallback className="border-none bg-linear-to-tr from-[rgb(199,243,107)] to-black text-white">
+                            RC
+                        </Avatar.Fallback>
+                    </Avatar>
+                    <span className="font-medium">Rohan Chatterjee</span>
+                </div>
+
             </div>
-            {children}
-        </>
+
+            <main className="flex-1 ml-84 p-6">
+                {children}
+            </main>
+        </div>
     )
 }
