@@ -6,7 +6,7 @@ import SideBar from "../Sidebar/page";
 
 export default function Navbar({ children }: { children: React.ReactNode }) {
     const pathname = usePathname()
-    if (pathname.includes('dashboard'))
+    if (pathname.includes('dashboard') || pathname.includes('generate'))
         return (
             <>
                 <SideBar>
