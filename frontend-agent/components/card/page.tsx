@@ -34,7 +34,7 @@ export default function PlaylistCard() {
                 </h3>
 
                 <p className="text-sm text-zinc-400">
-                    12 songs · 80 mins
+                    12 songs - 80 mins
                 </p>
             </Card.Content>
         </Card>
