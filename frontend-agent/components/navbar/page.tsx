@@ -1,12 +1,13 @@
 'use client'
 import { Button } from "@heroui/react";
-import { usePathname } from 'next/navigation';
 import React from "react";
 import SideBar from "../Sidebar/page";
+import { usePathname } from "next/navigation";
+
 
 export default function Navbar({ children }: { children: React.ReactNode }) {
     const pathname = usePathname()
-    if (pathname.includes('dashboard') || pathname.includes('generate'))
+    if (pathname.includes('dashboard') || pathname.includes('generate') || pathname.includes('playlist'))
         return (
             <>
                 <SideBar>

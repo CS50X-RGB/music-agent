@@ -1,7 +1,9 @@
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
-
+import Providers from "@/context/Providers"
+import Navbar from "@/components/navbar/page";
+import { Suspense } from "react";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -23,13 +25,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en" className={manrope.variable}>
       <body
         className="min-h-full flex flex-col p-8"
         suppressHydrationWarning
       >
-          {children}
+        <Providers>
+          <Suspense fallback={<div className="h-16" />}>
+            <Navbar>{children}</Navbar>
+          </Suspense>
+        </Providers>
       </body>
     </html>
   );
