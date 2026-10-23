@@ -1,6 +1,5 @@
 import Hero from "@/components/hero/page";
-import Navbar from "@/components/navbar/page";
-import { Suspense } from "react";
+
 
 export default function Home() {
   return (

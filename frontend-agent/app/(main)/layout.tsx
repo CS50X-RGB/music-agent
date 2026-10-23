@@ -1,7 +1,6 @@
 import { Manrope } from "next/font/google";
 import "../globals.css";
 import type { Metadata } from "next";
-import Navbar from "@/components/navbar/page";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -29,9 +28,7 @@ export default function RootLayout({
         className="min-h-full flex flex-col"
         suppressHydrationWarning
       >
-        <Navbar>
-          {children}
-        </Navbar>
+        {children}
       </body>
     </html>
   );

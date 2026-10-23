@@ -138,7 +138,7 @@ export default function SideBar({
                 </div>
             )}
 
-            <main className="min-w-0 flex-1 p-4 md:ml-40 rounded-xl md:p-6">
+            <main className="w-64 flex-1 p-4 rounded-xl">
                 {children}
             </main>
         </div>

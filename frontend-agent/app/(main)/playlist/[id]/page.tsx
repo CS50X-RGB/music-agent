@@ -67,7 +67,7 @@ export default function Playlist() {
     }, []);
     const playlistId = params.id;
     if(!songs) return null;
-    
+
     const isPlaylistSong = Boolean(
         currSong && songs.some((song) => song.id === currSong.id)
     );
@@ -90,7 +90,7 @@ export default function Playlist() {
 
     return (
         <>
-            <div className="min-h-screen bg-[#090B0A] text-[#F4F5F0]">
+            <div className="ml-70 min-h-screen bg-[#090B0A] text-[#F4F5F0]">
                 <section className="relative overflow-hidden">
                     <div className="absolute inset-0 bg-linear-to-b from-[#414a35] via-[#20251d] to-[#090B0A]" />
 
