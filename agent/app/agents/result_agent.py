@@ -20,8 +20,8 @@ def result_agent(messages, results, playlist):
     - If a song has a YouTube URL, include it as a Markdown link:
       [Watch on YouTube](URL)
     - If a song has no YouTube URL, display "No YouTube link found".
-    - Use a Markdown table with columns:
-      #, Title, Artist, Reason, YouTube Link
+    - Use a json with properties:
+      ID, Title, Artist, Reason, YouTube Link
     """
 
     response = llm.invoke(prompt)

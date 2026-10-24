@@ -1,5 +1,5 @@
 from typing import Annotated
-from typing_extensions import TypedDict
+from typing_extensions import TypedDict,NotRequired
 from langgraph.graph.message import add_messages
 
 class MusicState(TypedDict):
@@ -7,6 +7,8 @@ class MusicState(TypedDict):
     plan : object
     results : list
     playlist : object
+    session_id: NotRequired[str | None]
+    audio_files: NotRequired[list[dict]]
 ###We don't want every node to overwrite the previous messages.
 # add_messages tells LangGraph:
 #"When a node returns new messages,
