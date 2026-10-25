@@ -17,6 +17,7 @@ __pycache__/
 !.yarn/releases
 !.yarn/versions
 
+/agent/temp
 # Testing
 /coverage
 

@@ -17,11 +17,11 @@ def result_agent(messages, results, playlist):
     - Display the playlist name prominently as a Markdown heading.
     - List every song with its title, artist, reason, and YouTube link.
     - Do not invent songs, artists, reasons, or URLs.
-    - If a song has a YouTube URL, include it as a Markdown link:
+    - If a song has a Audio URL, include it as a Markdown link:
       [Watch on YouTube](URL)
-    - If a song has no YouTube URL, display "No YouTube link found".
+    - If a song has no Audio URL, display "No Audio link found".
     - Use a json with properties:
-      ID, Title, Artist, Reason, YouTube Link
+      ID, Title, Artist, Reason,Audio Url 
     """
 
     response = llm.invoke(prompt)

@@ -20,7 +20,9 @@ class PlaylistSong(BaseModel):
     video_id : str | None = None
     url : str | None = None
     embed_url : str | None = None
+    mp3_url : str | None = None
     
 class Playlist(BaseModel):
     name: str
     songs : list[PlaylistSong]
+    session_id : str | None = None
