@@ -22,6 +22,7 @@ export default function Input_<T extends Record<string, string>>({ state, name, 
                 bg-[rgba(20,23,20,0.65)] 
                 text-[rgba(199,243,107)]"
                 id={inputId}
+                size={10}
                 value={String(state[name])}
                 onChange={(e) => setState((prev) => ({
                     ...prev,

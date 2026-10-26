@@ -28,11 +28,6 @@ export default function RootLayout({
                 className="min-h-full flex flex-col p-8"
                 suppressHydrationWarning
             >
-                <div className="flex flex-row items-center gap-2">
-                    <h1 className="text-xl font-bold text-accent">
-                        Music Agent
-                    </h1>
-                </div>
                 <section className="flex min-h-[70vh] flex-col items-center justify-center gap-6 px-4 text-center">
                     {children}
                 </section>

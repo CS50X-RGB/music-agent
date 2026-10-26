@@ -1,0 +1,56 @@
+import axios from "axios";
+import Cookies from "js-cookie";
+import { adminToken, currentAdmin, currentUser, isSuperAdmin } from "./localStorageKeys"
+
+
+export const baseUrlExport = "https://api-inventory.swyftcore.in/api/v1/web/"
+export const baseUrlExportNgRok = "https://2798-106-222-236-78.ngrok-free.app"
+export const localBackend = "http://localhost:8080/api/web/api"
+
+const instance = axios.create({
+  baseURL: baseUrlExport,
+  headers: {
+    "Content-Type": "application/json",
+   //"ngrok-skip-browser-warning": "123",
+  },
+});
+
+// Request Interceptor (unchanged)
+instance.interceptors.request.use(
+  (config) => {
+    const token = Cookies.get(currentUser); 
+
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+   // Check if the request is multipart/form-data (file upload request)
+    if (config.data instanceof FormData) {
+      delete config.headers["Content-Type"];
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Response Interceptor (modified)
+instance.interceptors.response.use(
+  (response) => {
+    return response; // Return successful responses
+  },
+  (error) => {
+    if (error.response && error.response.status === 403) {
+      // Remove all cookies if status code is 403 (Forbidden)
+      const location = Cookies.get(currentUser) ? "/dashboard" : "/login";
+      Cookies.remove(currentUser);
+      Cookies.remove(adminToken);
+      Cookies.remove(currentAdmin);
+      Cookies.remove(isSuperAdmin);
+      window.location.href = location;
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default instance;

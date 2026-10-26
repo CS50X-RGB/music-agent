@@ -1,5 +1,6 @@
 import { Button } from "@heroui/react";
 
+
 export default function Hero() {
   return (
     <section className="flex min-h-[70vh] flex-col items-center justify-center gap-6 px-4 text-center">
