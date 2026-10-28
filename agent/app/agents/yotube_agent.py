@@ -1,7 +1,7 @@
 from app.agents.schema import Playlist
 from app.tools.yotube_tools import search_youtube
-from app.agents.youtube_mp3 import download_audio,download_audio_batch
-import os,uuid
+from app.agents.youtube_mp3 import download_audio_batch
+import os,uuid,shutil
 
 def youtube_agent(playlist: Playlist) -> Playlist:
     """Find one youtbe video for each song in the playlist."""
@@ -29,12 +29,12 @@ def youtube_agent(playlist: Playlist) -> Playlist:
             })
     
     download = download_audio_batch(batch,session_dir)
-    
+    # shutil.rmtree(session_dir, ignore_errors=True)
     for song, audio in zip(
         [s for s in playlist.songs if s.video_id],
         download
     ):
-        song.mp3_url = audio["mp3_path"]
+        song.mp3_url = audio["mp3_url"] # AWS LINK
         
     return playlist
 
