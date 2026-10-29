@@ -33,7 +33,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                         </div>
                     )}
                 </nav>
-                <div className="flex flex-col p-8 items-center gap-4">
+                <div className="flex flex-col p-8  items-center gap-4">
                     {children}
                 </div>
             </>
