@@ -12,7 +12,8 @@ def youtube_agent(playlist: Playlist) -> Playlist:
     ]
     
     results = search_youtube.invoke({"songs" : songs})
-    session_dir = os.path.join("temp", str(uuid.uuid4()))
+    session_id = str(uuid.uuid4())
+    session_dir = os.path.join("temp", session_id)
     os.makedirs(session_dir, exist_ok=True)
     batch = []
     for song,result in zip(playlist.songs,results):
@@ -29,7 +30,8 @@ def youtube_agent(playlist: Playlist) -> Playlist:
             })
     
     download = download_audio_batch(batch,session_dir)
-    # shutil.rmtree(session_dir, ignore_errors=True)
+    shutil.rmtree(session_dir, ignore_errors=True)
+    playlist.session_id = session_id
     for song, audio in zip(
         [s for s in playlist.songs if s.video_id],
         download

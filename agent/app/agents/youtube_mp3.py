@@ -32,6 +32,9 @@ def download_audio_batch(songs, output_directory="temp"):
     output_directory = Path(output_directory).resolve()
     output_directory.mkdir(parents=True, exist_ok=True)
 
+    session_id = output_directory.name
+    uploaded_songs = []
+
     options = {
         "format": "bestaudio/best",
         "outtmpl": str(output_directory / "%(title)s.%(ext)s"),
@@ -44,36 +47,30 @@ def download_audio_batch(songs, output_directory="temp"):
         }],
     }
 
-    urls = [song["url"] for song in songs]
-
     with yt_dlp.YoutubeDL(options) as ydl:
-        ydl.download(urls)
+        for song in songs:
+            info = ydl.extract_info(song["url"], download=True)
 
-    uploaded_songs = []
+            # Use yt-dlp's actual title, not song["title"].
+            actual_title = info["title"]
+            mp3_path = output_directory / f"{actual_title}.mp3"
 
-    # output_directory should be temp/<session_id>
-    session_id = output_directory.name
+            if not mp3_path.is_file():
+                raise FileNotFoundError(
+                    f"MP3 not found: {mp3_path}\n"
+                    f"Files: {list(output_directory.iterdir())}"
+                )
 
-    for song in songs:
-        # Get the actual filename yt-dlp used
-        file_path = output_directory / f"{song['title']}.mp3"
-
-        if not file_path.is_file():
-            raise FileNotFoundError(
-                f"MP3 not found: {file_path}\n"
-                f"Directory contents: {list(output_directory.iterdir())}"
+            object_key = s3.upload_mp3(
+                session_id=session_id,
+                file_path=str(mp3_path),
             )
 
-        object_key = s3.upload_mp3(
-            session_id=session_id,
-            file_path=str(file_path),
-        )
-
-        uploaded_songs.append({
-            **song,
-            "mp3_path": str(file_path),
-            "s3_key": object_key,
-            "mp3_url": s3.get_playback_url(object_key),
-        })
+            uploaded_songs.append({
+                **song,
+                "mp3_path": str(mp3_path),
+                "s3_key": object_key,
+                "mp3_url": s3.get_playback_url(object_key),
+            })
 
     return uploaded_songs

@@ -2,15 +2,33 @@
 import Input_ from "@/components/resuables/Input/page";
 import { Button } from "@heroui/react";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { postData } from "@/core/api/apiHandler";
+import { accountRoutes } from "@/core/api/apiRoutes";
+import { UserRegister } from "@/types/states";
 
 export default function Register() {
-    const [form, setForm] = useState({
+    const [form, setForm] = useState<UserRegister>({
         email: "",
         password: "",
         name : ""
     });
+    const registerMutate = useMutation({
+        mutationKey : ["register"],
+        mutationFn : async (data : UserRegister) => {
+            return await postData(accountRoutes.register,{},data);
+        },
+        onError : (err: unknown) => {
+            console.log(err)
+        },
+        onSuccess : (data : unknown) => {
+            console.log(data);
+        }
+    })
+    
     const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
+        registerMutate.mutate(form);
     };
     return (
         <div className="flex flex-col p-8 gap-4 rounded-2xl border border-[rgba(199,243,107,0.16)] bg-[rgba(20,23,20,0.65)] backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.25)]">
@@ -24,7 +42,7 @@ export default function Register() {
                 <Input_ type="text" placeholder="Rohan" state={form} setState={setForm} name="name" />
                 <Input_ type="email" placeholder="johndoe@gmail.com" state={form} setState={setForm} name="email" />
                 <Input_ type="password" placeholder="abcd!23" state={form} setState={setForm} name="password" />
-                <Button size="lg" className={"w-full text-black"}>Submit</Button>
+                <Button type="submit" size="lg" className={"w-full text-black"}>Submit</Button>
             </form>
         </div>
     )   

@@ -5,10 +5,10 @@ import { adminToken, currentAdmin, currentUser, isSuperAdmin } from "./localStor
 
 export const baseUrlExport = "https://api-inventory.swyftcore.in/api/v1/web/"
 export const baseUrlExportNgRok = "https://2798-106-222-236-78.ngrok-free.app"
-export const localBackend = "http://localhost:8080/api/web/api"
+export const localBackend = "http://localhost:8080/api/web/v1"
 
 const instance = axios.create({
-  baseURL: baseUrlExport,
+  baseURL: localBackend,
   headers: {
     "Content-Type": "application/json",
    //"ngrok-skip-browser-warning": "123",

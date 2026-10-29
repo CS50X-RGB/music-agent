@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Depends,status
+from fastapi import APIRouter,Depends,status,Request
 from sqlalchemy.orm import Session
 
 from app.core.dependencies import get_db
@@ -18,7 +18,7 @@ def register(
     data : RegisterReq,
     db : Session = Depends(get_db),
 ):
-    return auth_service.register(db,data.email,data.password)
+    return auth_service.register(db,data.email,data.password,data.name)
 
 @router.post('/login',response_model=TokenReponse)
 def login(
@@ -26,3 +26,7 @@ def login(
     db : Session = Depends(get_db)
 ):
     return auth_service.login(db,data.email,data.password)
+
+@router.get('/profile')
+async def get_profile(request : Request):
+    return auth_service.get_profile(request)

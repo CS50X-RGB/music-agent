@@ -4,7 +4,7 @@ from datetime import datetime,timezone
 from sqlalchemy import DateTime,String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped,mapped_column,relationship
-
+from app.model.playlist import Playlist
 
 from app.core.database import Base
 
@@ -16,7 +16,11 @@ class User(Base):
         primary_key=True,
         default=uuid.uuid4,
     )
-    
+    name : Mapped[str] = mapped_column(
+        String(40),
+        unique=False,
+        nullable=False
+    ) 
     email : Mapped[str] = mapped_column(
         String(320),
         unique=True,

@@ -11,7 +11,11 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped,mapped_column,relationship
 from app.core.database import Base
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from app.model.user import User
+    from app.model.feedback import SongFeedback
 
 class Playlist(Base):
     __tablename__ = "playlists"
@@ -33,7 +37,12 @@ class Playlist(Base):
         cascade="all, delete-orphan",
         order_by="PlaylistSong.position"
     )
-    
+    user_id : Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True),
+        ForeignKey("users.id",ondelete="CASCADE"),
+        nullable=False,
+        index=True
+    )
 
 class PlaylistSong(Base):
     __tablename__= "playlist_songs"

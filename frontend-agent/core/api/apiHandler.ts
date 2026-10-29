@@ -2,7 +2,6 @@ import instance from "./axiosInstance";
 
 
 export const getData = async (url: string, params: unknown) => {
-  console.log(url);
   return await instance.get(url, { params });
 };
 

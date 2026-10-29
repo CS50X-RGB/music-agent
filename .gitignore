@@ -7,6 +7,8 @@
 __pycache__/
 *.py[cod]
 
+/migrations/
+
 # Node dependencies
 /frontend-agent/node_modules/
 /frontend-agent/.pnp

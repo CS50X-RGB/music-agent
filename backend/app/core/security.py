@@ -4,16 +4,17 @@ import jwt
 from app.core.config import settings
 
 
-def create_access_token(user_id : str,user_email : str) -> str:
+def create_access_token(user_id : str,user_email : str,name : str) -> str:
     payload = {
         "sub" : user_id ,
         "email" : user_email,
+        "name" : name,
         "exp" : datetime.now(timezone.utc) + timedelta(minutes=settings.access_token_expire_min),
     }
     
     return jwt.encode(
         payload=payload,
-        secret_key=settings.secret_key,
+        key=settings.secret_key,
         algorithm=settings.algorithm
     )
 
@@ -24,7 +25,7 @@ def decode_access_token(token : str) -> str:
         secret_key=settings.secret_key,
         algorithm=settings.algorithm
     )
-    return payload["sub"],payload['email']
+    return payload["sub"], payload["email"], payload["name"]
 
 password_hash = PasswordHash.recommended()
 
