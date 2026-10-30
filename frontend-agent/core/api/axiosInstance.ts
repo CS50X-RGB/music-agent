@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { adminToken, currentAdmin, currentUser, isSuperAdmin } from "./localStorageKeys"
+import { adminToken, clientToken, currentAdmin, currentUser, isSuperAdmin } from "./localStorageKeys"
 
 
 export const baseUrlExport = "https://api-inventory.swyftcore.in/api/v1/web/"
@@ -18,7 +18,7 @@ const instance = axios.create({
 // Request Interceptor (unchanged)
 instance.interceptors.request.use(
   (config) => {
-    const token = Cookies.get(currentUser); 
+    const token = localStorage.getItem(clientToken)
 
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
@@ -42,7 +42,7 @@ instance.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 403) {
       // Remove all cookies if status code is 403 (Forbidden)
-      const location = Cookies.get(currentUser) ? "/dashboard" : "/login";
+      const location = localStorage.getItem(clientToken) ? "/dashboard" : "/login";
       Cookies.remove(currentUser);
       Cookies.remove(adminToken);
       Cookies.remove(currentAdmin);

@@ -1,4 +1,5 @@
 export const accountRoutes = {
     "login" : "/auth/login",
-    "register" : "/auth/register"
+    "register" : "/auth/register",
+    "profile" : "/auth/profile"
 }

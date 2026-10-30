@@ -10,21 +10,21 @@ class UserMiddleware(BaseHTTPMiddleware):
             "/api/web/v1/auth/login",
             "/api/web/v1/auth/register"
         }
-        
+
         if request.url.path in public_paths:
             return await call_next(request)
         
         auth = request.headers.get("Authorization")
-        
+
         if auth and auth.startswith("Bearer "):
             token = auth.split(" ",1)[1]
-            
             try:
-                user_id,email,name = decode_access_token(token=token)
+                value = decode_access_token(token=token)
+
                 request.state.user = {
-                    "id" : user_id,
-                    "email" : email,
-                    "name" : name
+                    "id" : value['sub'],
+                    "email" : value['email'],
+                    "name" : value['name']
                 }
             except jwt.InvalidTokenError:
                 return JSONResponse(

@@ -2,14 +2,14 @@ from pwdlib import PasswordHash
 from datetime import datetime,timedelta,timezone
 import jwt
 from app.core.config import settings
-
+import traceback
 
 def create_access_token(user_id : str,user_email : str,name : str) -> str:
     payload = {
         "sub" : user_id ,
         "email" : user_email,
         "name" : name,
-        "exp" : datetime.now(timezone.utc) + timedelta(minutes=settings.access_token_expire_min),
+        "exp" : datetime.now(timezone.utc) + timedelta(hours=settings.expire_time_hrs),
     }
     
     return jwt.encode(
@@ -19,13 +19,16 @@ def create_access_token(user_id : str,user_email : str,name : str) -> str:
     )
 
 
-def decode_access_token(token : str) -> str:
-    payload =  jwt.decode(
-        token,
-        secret_key=settings.secret_key,
-        algorithm=settings.algorithm
+def decode_access_token(token: str):
+    payload = jwt.decode(
+        jwt=token,
+        key=settings.secret_key,
+        algorithms=[settings.algorithm]
     )
-    return payload["sub"], payload["email"], payload["name"]
+
+    return payload
+
+
 
 password_hash = PasswordHash.recommended()
 

@@ -18,7 +18,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=['*']
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 app.add_middleware(UserMiddleware)
 app.include_router(playlist_router, prefix=API_PREFIX)

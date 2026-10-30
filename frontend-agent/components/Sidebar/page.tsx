@@ -31,7 +31,7 @@ export default function SideBar({
         },
         {
             name: "My Playlists",
-            href: "/playlists",
+            href: "/playlists/1",
             icon: <IoSave size={18} />,
         },
         {
@@ -138,7 +138,7 @@ export default function SideBar({
                 </div>
             )}
 
-            <main className="w-64 flex-1 ml-84 p-4 rounded-xl">
+            <main className="w-full md:w-64 flex-1 md:ml-84 p-4 rounded-xl">
                 {children}
             </main>
         </div>
