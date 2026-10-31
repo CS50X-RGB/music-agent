@@ -1,13 +1,13 @@
-import { Manrope } from "next/font/google";
 import "../globals.css";
 import type { Metadata } from "next";
+import { Roboto } from "next/font/google";
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-  display: "swap",
+const roboto = Roboto({
+    subsets: ["latin"],
+    weight: ["400", "500", "700"],
+    variable: "--font-roboto",
+    display: "swap",
 });
-
 export const metadata: Metadata = {
   title: {
     default: "MusicAgent — Your Mood, Your Music",
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={manrope.variable}>
+    <html lang="en" className={roboto.variable} suppressHydrationWarning>
       <body
         className="min-h-full flex flex-col"
         suppressHydrationWarning

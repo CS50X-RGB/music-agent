@@ -5,6 +5,7 @@ import SideBar from "../Sidebar/page";
 import { usePathname, useRouter } from "next/navigation";
 
 
+
 export default function Navbar({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const router = useRouter();

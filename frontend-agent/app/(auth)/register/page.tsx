@@ -4,7 +4,7 @@ import { Button, toast } from "@heroui/react";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { postData } from "@/core/api/apiHandler";
-import { clientToken } from "@/core/api/localStorageKeys";
+import { clientToken,currentUser } from "@/core/api/localStorageKeys";
 import { accountRoutes } from "@/core/api/apiRoutes";
 import { UserRegister } from "@/types/states";
 import { useRouter } from "next/navigation";
@@ -54,9 +54,10 @@ export default function Register() {
                 }
             }
 
-            const { access_token } = response.data;
+            const { access_token,user } = response.data;
             localStorage.setItem(clientToken,access_token);
-            toast.success('Registered Sucessf')
+            localStorage.setItem(currentUser,JSON.stringify(user));
+            toast.success('Registered Sucessful!')
             router.push('/dashboard');
         }
     });
@@ -80,5 +81,5 @@ export default function Register() {
                 <Button type="submit" size="lg" className={"w-full text-black"}>Submit</Button>
             </form>
         </div>
-    )
+    ) 
 }

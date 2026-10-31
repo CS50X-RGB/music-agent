@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import Providers from "@/context/Providers"
 import Navbar from "@/components/navbar/page";
 import { Suspense } from "react";
+import { LoadingProvider } from "@/context/LoadingContext";
+import GlobalLoader from "@/context/GloablLoader";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -34,7 +36,10 @@ export default function RootLayout({
       >
         <Providers>
           <Suspense fallback={<div className="h-16" />}>
-            <Navbar>{children}</Navbar>
+          <GlobalLoader />
+            <Navbar>
+                {children}
+            </Navbar>
           </Suspense>
         </Providers>
       </body>

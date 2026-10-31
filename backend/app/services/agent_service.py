@@ -1,17 +1,9 @@
-from agent.app.graph.workflow import app as graph
+from agent.app.main.main import main
 
 class AgentService:
-    def __init__(self):
-        self.graph = graph
+
     
     def generate_playlist(self,prompt:str) -> str:
-        result = self.graph.invoke({
-            "messages" : [
-                {
-                    "role" : "user",
-                    "content" : prompt
-                }
-            ]
-        })
+        result = main(prompt)
         
         return result["messages"][-1].content

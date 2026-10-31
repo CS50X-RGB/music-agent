@@ -3,3 +3,7 @@ export const accountRoutes = {
     "register" : "/auth/register",
     "profile" : "/auth/profile"
 }
+
+export const agentRoutes = {
+    "generate" : "/agent/generate"
+}

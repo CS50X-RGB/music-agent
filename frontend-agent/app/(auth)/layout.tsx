@@ -1,12 +1,6 @@
-import { Manrope } from "next/font/google";
 import "../globals.css";
 import type { Metadata } from "next";
 
-const manrope = Manrope({
-    subsets: ["latin"],
-    variable: "--font-manrope",
-    display: "swap",
-});
 
 export const metadata: Metadata = {
     title: {
@@ -23,15 +17,10 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={manrope.variable}>
-            <body
-                className="min-h-full flex flex-col p-8"
-                suppressHydrationWarning
-            >
-                <section className="flex min-h-[70vh] flex-col items-center justify-center gap-6 px-4 text-center">
-                    {children}
-                </section>
-            </body>
-        </html>
+        <div className="min-h-full flex flex-col p-8">
+            <section className="flex min-h-[70vh] flex-col items-center justify-center gap-6 px-4 text-center">
+                {children}
+            </section>
+        </div>
     );
 }

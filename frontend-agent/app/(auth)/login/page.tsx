@@ -40,8 +40,9 @@ export default function Login() {
                 }
             }
 
-            const { access_token } = response.data;
+            const { access_token,user } = response.data;
             localStorage.setItem(clientToken,access_token);
+
             toast.success('Login Sucessful!')
             router.push('/dashboard');
         }
