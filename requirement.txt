@@ -5,3 +5,4 @@ pytube
 moviepy
 yt_dlp
 boto3
+pylast

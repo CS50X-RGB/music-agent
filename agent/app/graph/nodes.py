@@ -1,9 +1,9 @@
-from backend.backend.app.agents.playlist_agent import playlist_agent
-from backend.backend.app.agents.plan_executor import execute_plan
-from backend.app.agents.result_agent import result_agent
-from backend.app.agents.playlist_creator import playlist_creator
-from backend.app.graph.state import MusicState
-from backend.app.agents.yotube_agent import youtube_agent
+from agent.app.agents.playlist_agent import playlist_agent
+from agent.app.agents.plan_executor import execute_plan
+from agent.app.agents.result_agent import result_agent
+from agent.app.agents.playlist_creator import playlist_creator
+from agent.app.graph.state import MusicState
+from agent.app.agents.yotube_agent import youtube_agent
 
 def result_node(state : MusicState):
     response = result_agent(

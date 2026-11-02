@@ -5,12 +5,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase,sessionmaker
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).resolve().parents[3]
+BACKEND_DIR = Path(__file__).resolve().parents[2]
 
 class Settings(BaseSettings):
     database_url : str
     model_config = SettingsConfigDict(
-        env_file=ROOT_DIR / ".env",
+        env_file=BACKEND_DIR / ".env",
         extra="ignore",
     )
 

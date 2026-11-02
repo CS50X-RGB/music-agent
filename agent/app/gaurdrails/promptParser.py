@@ -1,5 +1,5 @@
 from langchain_core.prompts import ChatPromptTemplate
-from backend.app.llm.model import get_llm
+from agent.app.llm.model import get_llm
 from langchain.agents.middleware import AgentMiddleware
 
 

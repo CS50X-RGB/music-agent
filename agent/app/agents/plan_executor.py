@@ -1,8 +1,8 @@
 import json
 
-from backend.app.agents.schema import MusicPlan
-from backend.app.tools.music_tools import search_music
-from backend.app.tools.last_fm_tools import get_similar_artists
+from agent.app.agents.schema import MusicPlan
+from agent.app.tools.music_tools import search_music
+from agent.app.tools.last_fm_tools import get_similar_artists
 
 
 def execute_plan(plan: MusicPlan):

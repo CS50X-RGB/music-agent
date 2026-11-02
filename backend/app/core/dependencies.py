@@ -6,8 +6,8 @@ import jwt
 from fastapi import Depends,HTTPException,status
 from fastapi.security import HTTPAuthorizationCredentials,HTTPBearer
 from sqlalchemy.orm import Session
-from backend.backend.app.core.config import settings
-from backend.backend.app.model.user import User
+from backend.app.core.config import settings
+from backend.app.model.user import User
 from backend.app.repositories.user_repository import UserRepository
 
 bearer_scheme = HTTPBearer(auto_error=False)

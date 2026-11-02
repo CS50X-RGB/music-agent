@@ -1,6 +1,6 @@
-from backend.app.llm.model import get_llm
+from agent.app.llm.model import get_llm
 from langchain_core.messages import SystemMessage
-from backend.app.agents.schema import MusicPlan
+from agent.app.agents.schema import MusicPlan
 
 def playlist_agent(messages):
     llm = get_llm()

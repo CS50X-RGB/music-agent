@@ -1,5 +1,5 @@
-from backend.app.llm.model import get_llm
-from backend.app.agents.schema import Playlist
+from agent.app.llm.model import get_llm
+from agent.app.agents.schema import Playlist
 from langchain_core.messages import SystemMessage
 
 

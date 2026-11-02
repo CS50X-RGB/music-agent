@@ -1,6 +1,6 @@
-from backend.app.agents.schema import Playlist
-from backend.app.tools.yotube_tools import search_youtube
-from backend.app.agents.youtube_mp3 import download_audio_batch
+from agent.app.agents.schema import Playlist
+from agent.app.tools.yotube_tools import search_youtube
+from agent.app.agents.youtube_mp3 import download_audio_batch
 import os,uuid,shutil
 
 def youtube_agent(playlist: Playlist) -> Playlist:

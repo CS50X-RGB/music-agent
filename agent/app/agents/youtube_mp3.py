@@ -1,6 +1,6 @@
 import os
 import yt_dlp
-from backend.app.aws.s3 import s3
+from agent.app.aws.s3 import s3
 from pathlib import Path
 
 def download_audio(title: str, url: str, output_directory: str = "temp"):
