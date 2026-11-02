@@ -4,9 +4,9 @@ from datetime import datetime,timezone
 from sqlalchemy import DateTime,String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped,mapped_column,relationship
-from app.model.playlist import Playlist
+from backend.app.model.playlist import Playlist
 
-from app.core.database import Base
+from backend.app.core.database import Base
 
 class User(Base):
     __tablename__ = "users"

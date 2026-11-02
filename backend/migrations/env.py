@@ -2,8 +2,8 @@ import os
 from sqlalchemy import create_engine
 from alembic import context
 from dotenv import load_dotenv
-from app.core.database import Base
-from app.model import User, Playlist, PlaylistSong, SongFeedback
+from backend.app.core.database import Base
+from backend.app.model import User, Playlist, PlaylistSong, SongFeedback
 
 
 load_dotenv()

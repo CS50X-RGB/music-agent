@@ -1,8 +1,8 @@
 from fastapi import HTTPException,status,Request
 from sqlalchemy.orm import Session
-from app.model.user import User
-from app.repositories.user_repository import UserRepository
-from app.core.security import (
+from backend.app.model.user import User
+from backend.app.repositories.user_repository import UserRepository
+from backend.app.core.security import (
     hash_password,
     verify_password,
     create_access_token

@@ -1,6 +1,6 @@
 from fastapi import Request
 from starlette.middleware.base import BaseHTTPMiddleware
-from app.core.security import decode_access_token
+from backend.app.core.security import decode_access_token
 import jwt
 from fastapi.responses import JSONResponse
 

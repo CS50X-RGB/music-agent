@@ -1,7 +1,7 @@
 from pwdlib import PasswordHash
 from datetime import datetime,timedelta,timezone
 import jwt
-from app.core.config import settings
+from backend.app.core.config import settings
 import traceback
 
 def create_access_token(user_id : str,user_email : str,name : str) -> str:

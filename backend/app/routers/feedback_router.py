@@ -2,10 +2,10 @@ from uuid import UUID
 from fastapi import APIRouter,Depends
 from sqlalchemy.orm import Session
 
-from app.core.dependencies import get_current_user,get_db
-from app.model.user import User
-from app.schemas.feedback import FeedbackCreate,FeedbackResponse
-from app.services.feedback_service import FeedbackService
+from backend.app.core.dependencies import get_current_user,get_db
+from backend.app.model.user import User
+from backend.app.schemas.feedback import FeedbackCreate,FeedbackResponse
+from backend.app.services.feedback_service import FeedbackService
 
 router = APIRouter(tags=["Song Feedback"])
 feedback_service = FeedbackService()

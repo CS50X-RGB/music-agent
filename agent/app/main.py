@@ -1,5 +1,5 @@
-from app.graph.workflow import app
-from app.gaurdrails.promptParser import MusicGuardrail
+from backend.backend.app.graph.workflow import app
+from backend.backend.app.gaurdrails.promptParser import MusicGuardrail
 
 def main(user_prompt=""):
     guardrail = MusicGuardrail()
@@ -7,7 +7,7 @@ def main(user_prompt=""):
     if not guardrail.validate_prompt(user_prompt=user_prompt):
         return "Prompt is not good"
     
-    result = app.invoke({
+    result = backend.app.invoke({
         "messages": [
             ("user", user_prompt)
         ],

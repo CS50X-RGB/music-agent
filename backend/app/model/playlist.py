@@ -10,12 +10,12 @@ from sqlalchemy import (
 )
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped,mapped_column,relationship
-from app.core.database import Base
+from backend.app.core.database import Base
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from app.model.user import User
-    from app.model.feedback import SongFeedback
+    from backend.app.model.user import User
+    from backend.app.model.feedback import SongFeedback
 
 class Playlist(Base):
     __tablename__ = "playlists"

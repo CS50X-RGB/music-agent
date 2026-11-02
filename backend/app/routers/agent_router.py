@@ -1,9 +1,9 @@
 from fastapi import APIRouter,Depends
-from app.core.dependencies import get_current_user
-from app.model.user import User
-from app.schemas.agent import AgentRequest,AgentResponse
-from app.services.agent_service import AgentService
-from agent.app.graph.workflow import app as graph
+from backend.app.core.dependencies import get_current_user
+from backend.app.model.user import User
+from backend.app.schemas.agent import AgentRequest,AgentResponse
+from backend.app.services.agent_service import AgentService
+from agent.backend.app.graph.workflow import app as graph
 
 router = APIRouter(prefix="/agent",tags=['Music Agent'])
 agent_service = AgentService(graph=graph)

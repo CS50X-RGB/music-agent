@@ -1,6 +1,6 @@
 'use client'
-import { Button } from "@heroui/react";
-import React, { useEffect, useState } from "react";
+import { Avatar, Button } from "@heroui/react";
+import React from "react";
 import SideBar from "../Sidebar/page";
 import { usePathname, useRouter } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
@@ -28,12 +28,25 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                             [Music Agent]
                         </h1>
                     </div>
-                    {!(pathname.includes('login') || pathname.includes('register')) && (
+                    {!(pathname.includes('login') || pathname.includes('register')) && !accountData && (
                         <div className="flex flex-end gap-2">
                             <Button size="md" className={"text-black"} onPress={() => router.push("/login")}>Login</Button>
                             <Button size="md" className={"text-black"} onPress={() => router.push("/register")}>Register</Button>
                         </div>
                     )}
+                    {pathname.includes('/') && !error && (
+                    <Avatar>
+                        <Avatar.Fallback className="border-none text-black bg-[rgb(199,243,107)]">
+                            {accountData?.data.name
+                                ?.split(" ")
+                                .map((word: string) => word[0])
+                                .join("")
+                                .slice(0, 2)
+                                .toUpperCase() || "U"}
+                        </Avatar.Fallback>
+                    </Avatar>
+                )}
+
                 </nav>
                 <div className="flex flex-col p-8  items-center gap-4">
                     {children}

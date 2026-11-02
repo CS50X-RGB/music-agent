@@ -1,7 +1,7 @@
 from uuid import UUID
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from app.model.playlist import Playlist,PlaylistSong
+from backend.app.model.playlist import Playlist,PlaylistSong
 
 
 class PlaylistRepo:

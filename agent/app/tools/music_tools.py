@@ -1,6 +1,6 @@
 from langchain_core.tools import tool
 import httpx
-from app.exception.MusicSearchError import MusicSearchError
+from backend.app.exception.MusicSearchError import MusicSearchError
 
 BASE_URL = "https://musicbrainz.org/ws/2/recording"
 

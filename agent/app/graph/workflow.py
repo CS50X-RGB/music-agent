@@ -1,10 +1,10 @@
-from app.graph.state import MusicState
-# from app.llm.model import get_llm
-# from app.tools.music_tools import search_music
-# from app.tools.last_fm_tools import get_similar_artists
+from backend.app.graph.state import MusicState
+# from backend.app.llm.model import get_llm
+# from backend.app.tools.music_tools import search_music
+# from backend.app.tools.last_fm_tools import get_similar_artists
 # from langgraph.prebuilt import ToolNode,tools_condition
 from langgraph.graph import StateGraph,START,END
-from app.graph.nodes import (
+from backend.app.graph.nodes import (
     orchestrator_node,
     executor_node,
     playlist_creator_node,

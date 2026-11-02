@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import type { ReactNode } from "react";
 import Link from "next/link";
 
@@ -12,8 +12,6 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoLogOut } from "react-icons/io5";
 import { clientToken, currentUser } from "@/core/api/localStorageKeys";
 import { useRouter } from "next/navigation";
-import { User } from "@/types/states";
-import { queryClient } from "@/context/Providers";
 import { getData } from "@/core/api/apiHandler";
 import { accountRoutes } from "@/core/api/apiRoutes";
 import { useQuery } from "@tanstack/react-query";

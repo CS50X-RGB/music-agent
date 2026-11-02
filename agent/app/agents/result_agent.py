@@ -1,4 +1,4 @@
-from app.llm.model import get_llm
+from backend.app.llm.model import get_llm
 
 
 def result_agent(messages, results, playlist):

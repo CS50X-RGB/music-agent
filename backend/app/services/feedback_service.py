@@ -1,8 +1,8 @@
 from uuid import UUID
 from fastapi import HTTPException,status
 from sqlalchemy.orm import Session
-from app.model.feedback import SongFeedback
-from app.repositories.feedback_repository import FeedbackRepository
+from backend.app.model.feedback import SongFeedback
+from backend.app.repositories.feedback_repository import FeedbackRepository
 
 class FeedbackService:
     

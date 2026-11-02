@@ -1,14 +1,14 @@
 from collections.abc import Generator
 from sqlalchemy.orm import Session
-from app.core.database import SessionLocal
+from backend.app.core.database import SessionLocal
 from uuid import UUID
 import jwt
 from fastapi import Depends,HTTPException,status
 from fastapi.security import HTTPAuthorizationCredentials,HTTPBearer
 from sqlalchemy.orm import Session
-from app.core.config import settings
-from app.model.user import User
-from app.repositories.user_repository import UserRepository
+from backend.backend.app.core.config import settings
+from backend.backend.app.model.user import User
+from backend.app.repositories.user_repository import UserRepository
 
 bearer_scheme = HTTPBearer(auto_error=False)
 user_repo = UserRepository()

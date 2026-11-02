@@ -1,8 +1,8 @@
 from uuid import UUID
 from sqlalchemy.orm import Session
-from app.model.playlist import Playlist,PlaylistSong
-from app.repositories.playlist_repository import PlaylistRepo
-from app.schemas.playlist import PlaylistCreate
+from backend.app.model.playlist import Playlist,PlaylistSong
+from backend.app.repositories.playlist_repository import PlaylistRepo
+from backend.app.schemas.playlist import PlaylistCreate
 
 class PlaylistService:
     def __init__(self):

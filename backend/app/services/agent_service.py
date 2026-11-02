@@ -1,4 +1,5 @@
-from agent.app.main.main import main
+from agent.app import main
+
 
 class AgentService:
 
