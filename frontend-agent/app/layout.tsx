@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import Providers from "@/context/Providers"
 import Navbar from "@/components/navbar/page";
 import { Suspense } from "react";
-import { LoadingProvider } from "@/context/LoadingContext";
 import GlobalLoader from "@/context/GloablLoader";
 
 const manrope = Manrope({

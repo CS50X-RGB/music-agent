@@ -1,13 +1,14 @@
 'use client'
 import { Button } from "@heroui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../Sidebar/page";
 import { usePathname, useRouter } from "next/navigation";
-
+import useAuth from "@/hooks/useAuth";
 
 
 export default function Navbar({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
+    const {accountData,isLoading,isError,error} = useAuth();
     const router = useRouter();
 
     if (pathname.includes('dashboard') || pathname.includes('generate') || pathname.includes('playlist'))
