@@ -1,4 +1,4 @@
-from agent.app import main
+from agent.app.main import main
 
 
 class AgentService:
@@ -7,4 +7,4 @@ class AgentService:
     def generate_playlist(self,prompt:str) -> str:
         result = main(prompt)
         
-        return result["messages"][-1].content
+        return result['status'],result['msg']

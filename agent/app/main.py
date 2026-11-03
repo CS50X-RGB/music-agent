@@ -5,7 +5,10 @@ def main(user_prompt=""):
     guardrail = MusicGuardrail()
     
     if not guardrail.validate_prompt(user_prompt=user_prompt):
-        return "Prompt is not good"
+        return {
+            "status" : 400,
+            "msg" : "Prompt doesnt have correct artist name"
+        }
     
     result = app.invoke({
         "messages": [
@@ -15,7 +18,7 @@ def main(user_prompt=""):
         "results": []
     })
 
-    return (result["messages"][-1].content)
+    return {"status": 200,"msg" : result["messages"][-1].content}
 
 
 if __name__ == "__main__":

@@ -17,5 +17,9 @@ dependencies = [
     "email-validator>=2.3.0",
     "langgraph>=1.2.19",
     "langchain-groq",
+    "pylast",
+    "moviepy",
+    "yt_dlp",
+    "boto3",
     "pylast"
 ]

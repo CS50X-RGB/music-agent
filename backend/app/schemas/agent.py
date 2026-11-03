@@ -5,4 +5,5 @@ class AgentRequest(BaseModel):
 
 
 class AgentResponse(BaseModel):
+    status : str
     reponse : str
