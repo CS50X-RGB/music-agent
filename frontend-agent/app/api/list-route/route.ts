@@ -6,9 +6,9 @@ import crypto from "crypto";
 
 export async function POST(req: NextRequest) {
     try {
-        const data : { session_id : string;[key : string] : any } = await req.json();
+        const data : { session_id : string;[key : string] : unknown } = await req.json();
 
-        const { session_id,..other} =  data
+        const { session_id } =  data
         const filePath = path.join(os.tmpdir(), `${session_id}.json`);
 
         await writeFile(filePath, JSON.stringify(data), "utf-8");
