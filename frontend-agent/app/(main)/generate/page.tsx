@@ -1,17 +1,45 @@
 'use client'
 import { postData } from "@/core/api/apiHandler";
 import { agentRoutes } from "@/core/api/apiRoutes";
-import { Label, TextArea, Button } from "@heroui/react";
+import { Label, TextArea, Button,toast } from "@heroui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { HiSparkles } from "react-icons/hi2";
+import { useRouter } from "next/navigation";
+import { AgentResponse } from "@/types/states";
+
 
 export default function PromptInput() {
     const [prompt, setPrompt] = useState<string>("");
+    const router = useRouter();
     const promptAgent = useMutation({
         mutationKey : ["promptAgent"],
         mutationFn : (data : { prompt : string }) => {
             return postData(agentRoutes.generate,{},data);
+        },
+        onSuccess : async (data : AgentResponse) => {
+            const {msg,status} = data?.data;
+            if(status == 200){
+                try {
+                    const result = await fetch("/api/list-route",{
+                        method : "POST",
+                        headers : {
+                            "Content-Type" : "application/json",
+                        },
+                        body : JSON.stringify(msg)
+                    });
+
+                    if(!result.ok) throw new Error("Failed to save playlist JSON");
+
+                    const { session_id } = await result.json();
+
+                    router.push(`/playlist/${session_id}`)
+                } catch (error) {
+                    console.log('Error saving playlist: ',error)
+                }
+            }else if(status == 400){
+                toast.danger(`Prompt is not correct`)
+            }
         }
     });
 

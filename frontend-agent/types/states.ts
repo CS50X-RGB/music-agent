@@ -13,3 +13,10 @@ export interface User{
     id : string,
     email : string
 }
+
+export type AgentResponse = {
+    data : {
+        msg : Record<string,string>,
+        status : number
+    }
+}
