@@ -1,5 +1,5 @@
 from agent.app.main import main
-
+import json
 
 class AgentService:
 
@@ -7,4 +7,4 @@ class AgentService:
     def generate_playlist(self,prompt:str) -> str:
         result = main(prompt)
         
-        return result['status'],result['msg']
+        return int(result['status']),json.loads(result['msg'])

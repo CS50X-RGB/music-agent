@@ -2,6 +2,7 @@ import os
 import yt_dlp
 from agent.app.aws.s3 import s3
 from pathlib import Path
+import re,unicodedata
 
 def download_audio(title: str, url: str, output_directory: str = "temp"):
     os.makedirs(output_directory, exist_ok=True)
@@ -28,6 +29,13 @@ def download_audio(title: str, url: str, output_directory: str = "temp"):
 
     return mp3_path
 
+def normalize_title(title: str) -> str:
+    title = unicodedata.normalize("NFKD", title)
+    title = title.lower().strip()
+    title = re.sub(r"[^\w\s-]", "", title)
+    title = re.sub(r"\s+", "-", title)
+    return title
+
 def download_audio_batch(songs, output_directory="temp"):
     output_directory = Path(output_directory).resolve()
     output_directory.mkdir(parents=True, exist_ok=True)
@@ -50,10 +58,10 @@ def download_audio_batch(songs, output_directory="temp"):
     with yt_dlp.YoutubeDL(options) as ydl:
         for song in songs:
             info = ydl.extract_info(song["url"], download=True)
-
             # Use yt-dlp's actual title, not song["title"].
             actual_title = info["title"]
-            mp3_path = output_directory / f"{actual_title}.mp3"
+            print(actual_title)
+            mp3_path = output_directory/f"{actual_title}.mp3"
 
             if not mp3_path.is_file():
                 raise FileNotFoundError(
