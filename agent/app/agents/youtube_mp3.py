@@ -58,15 +58,17 @@ def download_audio_batch(songs, output_directory="temp"):
     with yt_dlp.YoutubeDL(options) as ydl:
         for song in songs:
             info = ydl.extract_info(song["url"], download=True)
-            # Use yt-dlp's actual title, not song["title"].
+
+            video_id = info["id"]
             actual_title = info["title"]
-            print(actual_title)
-            mp3_path = output_directory/f"{actual_title}.mp3"
+
+            # Filename is based on YouTube video ID
+            mp3_path = output_directory / f"{actual_title}.mp3"
 
             if not mp3_path.is_file():
                 raise FileNotFoundError(
                     f"MP3 not found: {mp3_path}\n"
-                    f"Files: {list(output_directory.iterdir())}"
+                    f"Downloaded files: {list(output_directory.iterdir())}"
                 )
 
             object_key = s3.upload_mp3(
@@ -76,6 +78,7 @@ def download_audio_batch(songs, output_directory="temp"):
 
             uploaded_songs.append({
                 **song,
+                "title": actual_title,
                 "mp3_path": str(mp3_path),
                 "s3_key": object_key,
                 "mp3_url": s3.get_playback_url(object_key),

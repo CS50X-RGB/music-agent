@@ -7,4 +7,4 @@ class AgentRequest(BaseModel):
 
 class AgentResponse(BaseModel):
     status : str
-    reponse : dict[str,Any]
+    reponse : Any

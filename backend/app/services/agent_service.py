@@ -6,5 +6,11 @@ class AgentService:
     
     def generate_playlist(self,prompt:str) -> str:
         result = main(prompt)
-        
-        return int(result['status']),json.loads(result['msg'])
+
+        status = result["status"]
+        msg = result["msg"]
+
+        if status != 200:
+            return status, msg
+
+        return status, json.loads(msg)
