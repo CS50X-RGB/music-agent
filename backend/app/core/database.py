@@ -1,27 +1,34 @@
 import os
-
-from pydantic_settings import BaseSettings,SettingsConfigDict
-from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclarativeBase,sessionmaker
 from pathlib import Path
+
+from dotenv import load_dotenv
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from sqlalchemy import create_engine
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
+
+load_dotenv()
 
 BACKEND_DIR = Path(__file__).resolve().parents[2]
 
+
 class Settings(BaseSettings):
-    database_url : str
+    database_url: str = os.getenv("")
     model_config = SettingsConfigDict(
         env_file=BACKEND_DIR / ".env",
         extra="ignore",
     )
 
+
 settings = Settings()
 
-engine = create_engine(settings.database_url,pool_pre_ping=True)
+engine = create_engine(settings.database_url, pool_pre_ping=True)
 
-SessionLocal = sessionmaker(bind=engine,autoflush=False,autocommit=False)
+SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+
 
 class Base(DeclarativeBase):
     pass
+
 
 # - Settings loads configuration from environment variables.
 # - engine manages connections to PostgreSQL.

@@ -8,6 +8,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from backend.app.core.database import Base
 from backend.app.model.playlist import PlaylistSong
 
+
 class SongFeedback(Base):
     __tablename__ = "song_feedback"
 

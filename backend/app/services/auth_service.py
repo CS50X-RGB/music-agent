@@ -1,12 +1,14 @@
-from fastapi import HTTPException,status,Request
+from fastapi import HTTPException, Request, status
 from sqlalchemy.orm import Session
-from backend.app.model.user import User
-from backend.app.repositories.user_repository import UserRepository
+
 from backend.app.core.security import (
+    create_access_token,
     hash_password,
     verify_password,
-    create_access_token
 )
+from backend.app.model.user import User
+from backend.app.repositories.user_repository import UserRepository
+
 
 class AuthService:
     def __init__(self):

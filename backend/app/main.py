@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.app.routers.playlist_router import router as playlist_router
+
+from backend.app.middleware.userMiddleware import UserMiddleware
+from backend.app.routers.agent_router import router as agent_router
 from backend.app.routers.auth_router import router as user_router
 from backend.app.routers.feedback_router import router as feedback_router
-from backend.app.routers.agent_router import router as agent_router
-from backend.app.middleware.userMiddleware import UserMiddleware
-
+from backend.app.routers.playlist_router import router as playlist_router
 
 app = FastAPI(title="Music Feedback API")
 

@@ -1,10 +1,9 @@
-from fastapi import APIRouter,Depends,status,Request
+from fastapi import APIRouter, Depends, Request, status
 from sqlalchemy.orm import Session
 
 from backend.app.core.dependencies import get_db
-from backend.app.schemas.auth import RegisterReq,LoginRequest,TokenReponse
+from backend.app.schemas.auth import LoginRequest, RegisterReq, TokenReponse
 from backend.app.services.auth_service import AuthService
-
 
 router = APIRouter(prefix='/auth',tags=['Authentication'])
 auth_service = AuthService()

@@ -1,11 +1,12 @@
 from uuid import UUID
-from fastapi import APIRouter,Depends,HTTPException,status
+
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from backend.app.core.dependencies import get_db,get_current_user
+from backend.app.core.dependencies import get_current_user, get_db
+from backend.app.model.user import User
 from backend.app.schemas.playlist import PlaylistCreate
 from backend.app.services.playlist_service import PlaylistService
-from backend.app.model.user import User
 
 router = APIRouter(prefix='/playlist',tags=['Playlists'])
 service = PlaylistService()

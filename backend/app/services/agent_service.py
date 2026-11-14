@@ -1,5 +1,7 @@
-from agent.app.main import main
 import json
+
+from agent.app.main import main
+
 
 class AgentService:
 

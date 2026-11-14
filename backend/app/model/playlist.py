@@ -1,21 +1,16 @@
 import uuid
-from datetime import datetime,timezone
-
-
-from sqlalchemy import (
-    DateTime,
-    ForeignKey,
-    String,
-    Text
-)
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import Mapped,mapped_column,relationship
-from backend.app.core.database import Base
+from datetime import datetime, timezone
 from typing import TYPE_CHECKING
 
+from sqlalchemy import DateTime, ForeignKey, String, Text
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from backend.app.core.database import Base
+
 if TYPE_CHECKING:
-    from backend.app.model.user import User
     from backend.app.model.feedback import SongFeedback
+    from backend.app.model.user import User
 
 class Playlist(Base):
     __tablename__ = "playlists"

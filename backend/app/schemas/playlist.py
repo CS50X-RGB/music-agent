@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 
+
 class PlaylistSongCreate(BaseModel):
     title: str = Field(min_length=1, max_length=300)
     artist: str = Field(min_length=1, max_length=300)
