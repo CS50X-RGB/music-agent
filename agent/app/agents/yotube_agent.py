@@ -1,7 +1,11 @@
+import os
+import shutil
+import uuid
+
 from agent.app.agents.schema import Playlist
-from agent.app.tools.yotube_tools import search_youtube
 from agent.app.agents.youtube_mp3 import download_audio_batch
-import os,uuid,shutil
+from agent.app.tools.yotube_tools import search_youtube
+
 
 def youtube_agent(playlist: Playlist) -> Playlist:
     """Find one youtbe video for each song in the playlist."""

@@ -4,9 +4,10 @@ from pydantic import BaseModel, Field
 
 
 class AgentRequest(BaseModel):
-    prompt : str = Field(min_length=1,max_length=10000)
+    prompt: str = Field(min_length=1, max_length=10000)
 
 
 class AgentResponse(BaseModel):
-    status : str
-    reponse : Any
+    status: int
+    reponse: Any
+

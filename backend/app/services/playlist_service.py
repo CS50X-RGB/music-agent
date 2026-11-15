@@ -10,11 +10,11 @@ from backend.app.schemas.playlist import PlaylistCreate
 class PlaylistService:
     def __init__(self):
         self.repo = PlaylistRepo()
-        
+
     def create_playlist(
         self,
         db: Session,
-        user : str,
+        user: str,
         data: PlaylistCreate,
     ) -> Playlist:
         playlist = Playlist(
@@ -34,10 +34,13 @@ class PlaylistService:
             ],
         )
 
-        return self.repository.create(db, playlist)
-    
-    def get_playlist(self,db : Session,playlist_id : UUID) -> Playlist | None:
-        return self.repo.get_by_id(db,playlist_id)
+        return self.repo.create(db, playlist)
 
-    def get_playlists_by_user_id(self,db : Session,user_id : UUID) -> list[Playlist] | None:
-        return self.repo.get_all(db,user_id)
+    def get_playlist(self, db: Session, playlist_id: UUID) -> Playlist | None:
+        return self.repo.get_by_id(db, playlist_id)
+
+    def get_playlists_by_user_id(
+        self, db: Session, user_id: UUID
+    ) -> list[Playlist] | None:
+        return self.repo.get_all(db, user_id)
+
