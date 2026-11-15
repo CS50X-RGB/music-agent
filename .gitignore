@@ -43,6 +43,7 @@ yarn-error.log*
 # Vercel
 .vercel/
 
+./temp/
 # TypeScript
 *.tsbuildinfo
 /frontend-agent/next-env.d.ts
