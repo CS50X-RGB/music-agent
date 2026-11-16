@@ -103,7 +103,8 @@ def download_audio_batch(songs, output_directory="temp"):
             session_id=session_id,
             file_path=str(mp3_path),
         )
-
+        mp3_url = s3.get_playback_url(object_key=object_key)
+        duration = s3.get_audio_duration(file_path=object_key)
         # Step 5: Save result
         uploaded_songs.append(
             {
@@ -111,7 +112,8 @@ def download_audio_batch(songs, output_directory="temp"):
                 "title": actual_title,
                 "mp3_path": str(mp3_path),
                 "s3_key": object_key,
-                "mp3_url": s3.get_playback_url(object_key),
+                "mp3_url": mp3_url,
+                "duration": duration,
             }
         )
 

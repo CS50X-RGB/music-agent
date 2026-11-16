@@ -20,11 +20,12 @@ def result_agent(messages, results, playlist):
             "session_id": "session-uuid",
             "songs": [
                 {{
-                    "ID": "song-uuid",
-                    "Title": "Song Title",
-                    "Artist": "Artist Name",
-                    "Reason": "Why this song matches the user's prompt",
-                    "Audio Url": "https://www.youtube.com/watch?v=example"
+                    "id": "song-uuid",
+                    "title": "Song Title",
+                    "artist": "Artist Name",
+                    "reason": "Why this song matches the user's prompt",
+                    "duration" : "<duration of mp3 file using duration attribute of song>"
+                    "audio_url": "<placeholder for the s3 bucket url link the mp3_url path from the object>"
                 }}
             ]
         }}

@@ -1,25 +1,20 @@
-from agent.app.graph.workflow import app
 from agent.app.gaurdrails.promptParser import MusicGuardrail
+from agent.app.graph.workflow import app
+
 
 def main(user_prompt=""):
     guardrail = MusicGuardrail()
-    
-    if not guardrail.validate_prompt(user_prompt=user_prompt):
-        return {
-            "status" : 400,
-            "msg" : "Prompt doesnt have correct artist name"
-        }
-    
-    result = app.invoke({
-        "messages": [
-            ("user", user_prompt)
-        ],
-        "plan": None,
-        "results": []
-    })
 
-    return {"status": 200,"msg" : result["messages"][-1].content}
+    if not guardrail.validate_prompt(user_prompt=user_prompt):
+        return {"status": 400, "msg": "Prompt doesnt have correct artist name"}
+
+    result = app.invoke(
+        {"messages": [("user", user_prompt)], "plan": None, "results": []}
+    )
+
+    return {"status": 200, "msg": result["messages"][-1].content}
 
 
 if __name__ == "__main__":
     main()
+

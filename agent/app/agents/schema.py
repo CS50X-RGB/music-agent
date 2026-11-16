@@ -1,28 +1,32 @@
 from pydantic import BaseModel
 from typing import Literal
 
+
 class MusicTask(BaseModel):
-    agent : str
-    operation : str
-    query : str
+    agent: str
+    operation: str
+    query: str
     search_type: Literal["artist", "song"] | None = None
-    depends_on : int | None = None
-    
+    depends_on: int | None = None
+
 
 class MusicPlan(BaseModel):
-    tasks : list[MusicTask]
+    tasks: list[MusicTask]
 
 
 class PlaylistSong(BaseModel):
-    title : str
-    artist : str
-    reason : str
-    video_id : str | None = None
-    url : str | None = None
-    embed_url : str | None = None
-    mp3_url : str | None = None
-    
+    title: str
+    artist: str
+    reason: str
+    video_id: str | None = None
+    url: str | None = None
+    embed_url: str | None = None
+    mp3_url: str | None = None
+    duration: str | None = None
+
+
 class Playlist(BaseModel):
     name: str
-    songs : list[PlaylistSong]
-    session_id : str | None = None
+    songs: list[PlaylistSong]
+    session_id: str | None = None
+

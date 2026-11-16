@@ -22,4 +22,5 @@ dependencies = [
   "boto3",
   "langchain>=1.4.9",
   "pytube>=15.0.0",
+  "mutagen>=1.48.1",
 ]

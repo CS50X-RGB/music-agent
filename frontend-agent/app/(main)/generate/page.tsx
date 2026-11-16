@@ -17,7 +17,6 @@ export default function PromptInput() {
       return postData(agentRoutes.generate, {}, data);
     },
     onSuccess: async (data: AgentResponse) => {
-      console.log(data?.data);
       const { reponse, status } = data?.data;
       if (status == 200) {
         try {
