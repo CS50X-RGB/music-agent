@@ -83,15 +83,16 @@ export default function Playlist() {
     enabled: !!playlistId,
   });
   useEffect(() => {
-    if (data && isFetched) {
+    if (data) {
+      console.log(data);
       setPlaylistName(data.playlist_name);
       setSongs(data.songs);
     }
-  }, []);
+  }, [data]);
 
   if (!songs) return null;
 
-  const isPlaylistSong = Boolean(currSong && songs.some((song) => song.id === currSong.id));
+  const isPlaylistSong = Boolean(currSong && songs.some((song) => song.ID === currSong.ID));
 
   const toggleLike = (songId: number) => {
     setLikedSongs((prev) =>
@@ -121,7 +122,9 @@ export default function Playlist() {
             <div className="flex flex-col gap-3">
               <p className="text-sm font-medium">Public Playlist</p>
 
-              <h1 className="text-4xl font-extrabold tracking-tight md:text-6xl">Playlist Name</h1>
+              <h1 className="text-4xl font-extrabold tracking-tight md:text-6xl">
+                {playlistName ?? "Playlist Name"}
+              </h1>
 
               <p className="max-w-xl text-sm text-[#C0C4BB] md:text-base">
                 Your personalized music collection, created with Music Agent.
@@ -163,7 +166,7 @@ export default function Playlist() {
             <div className="grid grid-cols-[32px_minmax(0,1fr)_80px] items-center gap-4 border-b border-[#343A31] px-4 py-3 text-sm text-[#A8ADA3] md:grid-cols-[40px_minmax(0,1fr)_minmax(120px,1fr)_100px]">
               <span>#</span>
               <span>Title</span>
-              <span className="hidden md:block">Album</span>
+              <span className="hidden md:block">Reason</span>
 
               <span className="flex items-center justify-end">
                 <IoTimeOutline size={20} />
@@ -172,11 +175,11 @@ export default function Playlist() {
 
             <div className="mt-2 flex flex-col">
               {songs.map((song, index) => {
-                const isLiked = likedSongs.includes(song.id);
-                const isCurrentSong = currSong?.id === song.id;
+                const isLiked = likedSongs.includes(song.ID);
+                const isCurrentSong = currSong?.ID === song.ID;
                 return (
                   <div
-                    key={song.id}
+                    key={song.ID}
                     className="group grid grid-cols-[32px_minmax(0,1fr)_80px] items-center gap-4 rounded-lg px-4 py-3 transition hover:bg-[#1B201A] md:grid-cols-[40px_minmax(0,1fr)_minmax(120px,1fr)_100px]"
                   >
                     <div className="flex items-center justify-center">
@@ -191,8 +194,8 @@ export default function Playlist() {
                         onClick={() => playing(song)}
                         aria-label={
                           isCurrentSong && isPlaying
-                            ? `Pause ${song.title} `
-                            : `Play ${song.title} `
+                            ? `Pause ${song.Title} `
+                            : `Play ${song.Title} `
                         }
                         className="hidden text-white group-hover:block"
                       >
@@ -212,19 +215,19 @@ export default function Playlist() {
                               : "text-[#F4F5F0] group-hover:text-[#C7F36B]"
                           } `}
                         >
-                          {song.title}
+                          {song.Title}
                         </p>
 
-                        <p className="truncate text-sm text-[#A8ADA3]">{song.artist}</p>
+                        <p className="truncate text-sm text-[#A8ADA3]">{song.Artist}</p>
                       </div>
                     </div>
                     <span className="hidden truncate text-sm text-[#A8ADA3] md:block">
-                      {song.album}
+                      {song.Reason}
                     </span>
                     <div className="flex items-center justify-end gap-3">
                       <button
-                        onClick={() => toggleLike(song.id)}
-                        aria-label={isLiked ? `Unlike ${song.title} ` : `Like ${song.title} `}
+                        onClick={() => toggleLike(song.ID)}
+                        aria-label={isLiked ? `Unlike ${song.Title} ` : `Like ${song.Title} `}
                         className={`transition ${
                           isLiked
                             ? "text-[#C7F36B]"
@@ -233,7 +236,7 @@ export default function Playlist() {
                       >
                         <FaHeart size={15} />
                       </button>
-                      <span className="text-sm text-[#A8ADA3]">{song.duration}</span>
+                      <span className="text-sm text-[#A8ADA3]">{song.Duration}</span>
                     </div>
                   </div>
                 );
