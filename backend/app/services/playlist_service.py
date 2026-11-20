@@ -20,14 +20,12 @@ class PlaylistService:
         playlist = Playlist(
             user_id=user,
             name=data.name,
-            original_prompt=data.original_prompt,
             songs=[
                 PlaylistSong(
                     title=song.title,
                     artist=song.artist,
                     reason=song.reason,
                     url=song.url,
-                    embed_url=song.embed_url,
                     position=index,
                 )
                 for index, song in enumerate(data.songs)
@@ -43,4 +41,3 @@ class PlaylistService:
         self, db: Session, user_id: UUID
     ) -> list[Playlist] | None:
         return self.repo.get_all(db, user_id)
-

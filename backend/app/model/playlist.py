@@ -45,7 +45,7 @@ class Playlist(Base):
         order_by="PlaylistSong.position",
     )
 
-    feedbacks: Mapped[list["UserFeedback"]] = relationship(
+    feedbacks: Mapped[list["SongFeedback"]] = relationship(
         back_populates="playlist", cascade="all, delete-orphan"
     )
 

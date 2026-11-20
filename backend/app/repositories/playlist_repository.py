@@ -1,3 +1,4 @@
+from typing import Optional
 from uuid import UUID
 
 from sqlalchemy import select
@@ -26,7 +27,7 @@ class PlaylistRepo:
             .where(Playlist.user_id == user_id)
             .order_by(Playlist.created_at.desc())
         )
-        return list(db.scalar(statement=statement).all())
+        return list(db.scalars(statement=statement).all())
 
     def update(self, db: Session, playlist_id: UUID, updates: dict) -> Playlist | None:
         playlist = db.get(Playlist, playlist_id)
@@ -52,3 +53,36 @@ class PlaylistRepo:
             db.rollback()
             raise
 
+
+class PlaylistSongRepo:
+    def create(self, db: Session, song: PlaylistSong) -> PlaylistSong:
+        try:
+            db.add(song)
+            db.commit()
+            db.refresh(song)
+            return song
+        except Exception:
+            db.rollback()
+            raise
+
+        def add_to_playlist(
+            self,
+            db: Session,
+            playlist_id: UUID,
+            title: str,
+            artist: str,
+            reason: [str | None] = None,
+            url: [str | None] = None,
+            position: int = 0,
+        ) -> PlaylistSong:
+
+            song = PlaylistSong(
+                playlist_id=playlist_id,
+                title=title,
+                artist=artist,
+                reason=reason,
+                url=url,
+                position=position,
+            )
+
+            return self.create(db, song)
