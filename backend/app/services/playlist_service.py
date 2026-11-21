@@ -14,7 +14,7 @@ class PlaylistService:
     def create_playlist(
         self,
         db: Session,
-        user: str,
+        user: UUID,
         data: PlaylistCreate,
     ) -> Playlist:
         playlist = Playlist(

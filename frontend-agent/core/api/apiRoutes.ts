@@ -1,9 +1,14 @@
 export const accountRoutes = {
-    "login" : "/auth/login",
-    "register" : "/auth/register",
-    "profile" : "/auth/profile"
-}
+  login: "/auth/login",
+  register: "/auth/register",
+  profile: "/auth/profile",
+};
 
 export const agentRoutes = {
-    "generate" : "/agent/generate"
-}
+  generate: "/agent/generate",
+};
+
+export const playlistRouter = {
+  like: "/playlist/like",
+};
+

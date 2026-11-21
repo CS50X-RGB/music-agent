@@ -6,50 +6,10 @@ import { FaPlay, FaPause, FaHeart, FaEllipsisH } from "react-icons/fa";
 import { IoTimeOutline } from "react-icons/io5";
 import { useMusicPlayer } from "@/context/useMusicPlayer";
 import MusicPlayerMain from "@/components/MusicPlayerMain/page";
-import { useQuery } from "@tanstack/react-query";
-
-const songRaw = [
-  {
-    id: 1,
-    title: "FE!N",
-    artist: "Travis Scott, Playboi Carti",
-    album: "UTOPIA",
-    duration: "3:11",
-    audioUrl: "/audio/POP OUT.mp3",
-  },
-  {
-    id: 2,
-    title: "Sky",
-    artist: "Playboi Carti",
-    album: "Whole Lotta Red",
-    duration: "3:13",
-    audioUrl: "/audio/UR THE M00N.mp3",
-  },
-  {
-    id: 3,
-    title: "Location",
-    artist: "Playboi Carti",
-    album: "Playboi Carti",
-    duration: "2:48",
-    audioUrl: "/audio/YSLCHEETAH.mp3",
-  },
-  {
-    id: 4,
-    title: "Magnolia",
-    artist: "Playboi Carti",
-    album: "Playboi Carti",
-    duration: "3:01",
-    audioUrl: "/audio/UR THE M00N.mp3",
-  },
-  {
-    id: 5,
-    title: "Stop Breathing",
-    artist: "Playboi Carti",
-    album: "Whole Lotta Red",
-    duration: "3:38",
-    audioUrl: "/audio/POP OUT.mp3",
-  },
-];
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { playlistRouter } from "@/core/api/apiRoutes";
+import { postData } from "@/core/api/apiHandler";
+import { Heart } from "lucide-react";
 
 export default function Playlist() {
   const params = useParams<{ id: string }>();
@@ -81,6 +41,13 @@ export default function Playlist() {
       return response.json();
     },
     enabled: !!playlistId,
+  });
+
+  const likePlaylist = useMutation({
+    mutationKey: ["like"],
+    mutationFn: async () => {
+      return await postData(playlistRouter.like, {}, { name: playlistName, songs });
+    },
   });
   useEffect(() => {
     if (data) {
@@ -136,6 +103,7 @@ export default function Playlist() {
 
                 <span className="text-[#A8ADA3]">{songs.length} songs</span>
 
+                <Heart size={20} onClick={() => likePlaylist.mutate()} />
                 <span className="text-[#A8ADA3]">·</span>
 
                 <span className="text-[#A8ADA3]">ID: {playlistId}</span>

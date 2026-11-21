@@ -12,6 +12,5 @@ class PlaylistSongCreate(BaseModel):
 
 class PlaylistCreate(BaseModel):
     name: str = Field(min_length=1, max_length=200)
-    user_id : str
-    original_prompt: str
     songs: list[PlaylistSongCreate]
+
