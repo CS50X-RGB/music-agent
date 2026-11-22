@@ -1,12 +1,12 @@
 import uuid
 from datetime import datetime, timezone
 
-from sqlalchemy import CheckConstraint, DateTime, ForeignKey, String
+from sqlalchemy import CheckConstraint, Column, DateTime, ForeignKey, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from backend.app.core.database import Base
-from backend.app.model.playlist import PlaylistSong
+from backend.app.model.playlist import Playlist
 
 
 class SongFeedback(Base):
@@ -25,11 +25,10 @@ class SongFeedback(Base):
         default=uuid.uuid4,
     )
 
-    song_id: Mapped[uuid.UUID] = mapped_column(
+    playlist_id = Column(
         UUID(as_uuid=True),
-        ForeignKey("playlist_songs.id", ondelete="CASCADE"),
+        ForeignKey("playlists.id", ondelete="CASCADE"),
         nullable=False,
-        index=True,
     )
 
     feedback_type: Mapped[str] = mapped_column(
@@ -48,6 +47,6 @@ class SongFeedback(Base):
         nullable=False,
         index=True,
     )
-    song: Mapped["PlaylistSong"] = relationship(
+    playlist: Mapped["Playlist"] = relationship(
         back_populates="feedback",
     )
