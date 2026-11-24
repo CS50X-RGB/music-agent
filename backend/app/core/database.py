@@ -12,14 +12,14 @@ BACKEND_DIR = Path(__file__).resolve().parents[2]
 
 
 class Settings(BaseSettings):
-    database_url: str = os.getenv("")
+    database_url: str
     model_config = SettingsConfigDict(
         env_file=BACKEND_DIR / ".env",
         extra="ignore",
     )
 
 
-settings = Settings()
+settings = Settings(database_url=os.getenv("DATABASE_URL"))
 
 engine = create_engine(settings.database_url, pool_pre_ping=True)
 

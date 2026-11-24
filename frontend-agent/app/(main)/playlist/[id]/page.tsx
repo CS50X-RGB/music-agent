@@ -44,7 +44,7 @@ export default function Playlist() {
   });
 
   const likePlaylist = useMutation({
-    mutationKey: ["like"],
+    mutationKey: ["like", playlistId],
     mutationFn: async () => {
       return await postData(playlistRouter.like, {}, { name: playlistName, songs });
     },

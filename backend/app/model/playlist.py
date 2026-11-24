@@ -70,8 +70,8 @@ class PlaylistSong(Base):
 
     reason: Mapped[str | None] = mapped_column(Text, nullable=True)
 
-    url: Mapped[str | None] = mapped_column(Text, nullable=True)
-
+    url: Mapped[str | None] = mapped_column(Text, nullable=False)
+    duration: Mapped[str | None] = mapped_column(Text, nullable=False)
     position: Mapped[int] = mapped_column(Integer, nullable=False)
 
     playlist: Mapped["Playlist"] = relationship(back_populates="songs")

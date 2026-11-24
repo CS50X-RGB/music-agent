@@ -48,5 +48,5 @@ class SongFeedback(Base):
         index=True,
     )
     playlist: Mapped["Playlist"] = relationship(
-        back_populates="feedback",
+        back_populates="feedbacks",
     )
