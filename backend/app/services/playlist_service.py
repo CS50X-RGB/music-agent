@@ -25,6 +25,7 @@ class PlaylistService:
                     title=song.title,
                     artist=song.artist,
                     reason=song.reason,
+                    duration=song.duration,
                     url=song.url,
                     position=index,
                 )
