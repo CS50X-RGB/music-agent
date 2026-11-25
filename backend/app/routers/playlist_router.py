@@ -27,12 +27,11 @@ def create_playlist(
     return service.create_playlist(db, user_id, data)
 
 
-"""
 @router.get("/my")
-def get_my_playlists(
-    db: Session = Depends(get_db), user: User = Depends(get_current_user)
-):
-    playlists = service.get_playlists_by_user_id(db, user.id)
+def get_my_playlists(request: Request, db: Session = Depends(get_db)):
+    user = request.state.user
+    user_id = UUID(user["id"])
+    playlists = service.get_playlists_by_user_id(db, user_id)
     if playlists and len(playlists) == 0:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="No Playlists found"
@@ -40,7 +39,7 @@ def get_my_playlists(
     return playlists
 
 
-
+"""
 @router.get("/{playlist_id}")
 def get_playlist(playlist_id: UUID, db: Session = Depends(get_db)):
     playlist = service.get_playlist(db, playlist_id)

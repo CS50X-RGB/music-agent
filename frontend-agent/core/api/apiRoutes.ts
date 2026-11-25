@@ -10,5 +10,5 @@ export const agentRoutes = {
 
 export const playlistRouter = {
   like: "/playlist/like",
+  myPlaylist: "/playlist/my",
 };
-
