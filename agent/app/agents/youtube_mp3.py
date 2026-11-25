@@ -1,9 +1,14 @@
 import os
-import yt_dlp
-from yt_dlp.utils import sanitize_filename
-from agent.app.aws.s3 import s3
+import re
+import unicodedata
 from pathlib import Path
-import re, unicodedata
+
+import requests
+import yt_dlp
+from mutagen.id3 import APIC, ID3, error
+from yt_dlp.utils import sanitize_filename
+
+from agent.app.aws.s3 import s3
 
 
 def download_audio(title: str, url: str, output_directory: str = "temp"):
@@ -40,6 +45,28 @@ def normalize_title(title: str) -> str:
     title = re.sub(r"[^\w\s-]", "", title)
     title = re.sub(r"\s+", "-", title)
     return title
+
+
+def add_thumbnail(mp3_path, thumbnail_url):
+    response = requests.get(thumbnail_url, timeout=15)
+    response.raise_for_status()
+
+    try:
+        tags = ID3(mp3_path)
+    except error:
+        tags = ID3()
+
+    tags.add(
+        APIC(
+            encoding=3,
+            mime="image/jpeg",
+            type=3,
+            desc="Cover",
+            data=response.content,
+        )
+    )
+
+    tags.save(mp3_path)
 
 
 def download_audio_batch(songs, output_directory="temp"):
@@ -97,7 +124,7 @@ def download_audio_batch(songs, output_directory="temp"):
                 f"MP3 not found: {mp3_path}\n"
                 f"Downloaded files: {list(output_directory.iterdir())}"
             )
-
+        add_thumbnail(str(mp3_path), info)
         # Step 4: Upload to S3
         object_key = s3.upload_mp3(
             session_id=session_id,
@@ -106,8 +133,6 @@ def download_audio_batch(songs, output_directory="temp"):
         mp3_url = s3.get_playback_url(object_key=object_key)
         duration = s3.get_audio_duration(file_path=str(mp3_path))
         # Step 5: Save result
-        print("actual_title" + actual_title)
-        print("duration" + str(duration))
         uploaded_songs.append(
             {
                 **song,

@@ -1293,6 +1293,7 @@ dependencies = [
     { name = "pylast", version = "7.2.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "python-dotenv" },
     { name = "pytube" },
+    { name = "requests" },
     { name = "uvicorn", extra = ["standard"] },
     { name = "yt-dlp", version = "2026.10.21", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "yt-dlp", version = "2026.10.26", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
@@ -1316,6 +1317,7 @@ requires-dist = [
     { name = "pylast" },
     { name = "python-dotenv", specifier = ">=1.2.4" },
     { name = "pytube", specifier = ">=15.0.0" },
+    { name = "requests", specifier = ">=2.34.2" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.52.4" },
     { name = "yt-dlp" },
 ]

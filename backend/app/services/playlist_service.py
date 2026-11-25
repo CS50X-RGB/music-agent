@@ -2,6 +2,7 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
+from agent.app.aws.s3 import s3
 from backend.app.model.playlist import Playlist, PlaylistSong
 from backend.app.repositories.playlist_repository import PlaylistRepo
 from backend.app.schemas.playlist import PlaylistCreate
@@ -10,6 +11,7 @@ from backend.app.schemas.playlist import PlaylistCreate
 class PlaylistService:
     def __init__(self):
         self.repo = PlaylistRepo()
+        self.s3 = s3
 
     def create_playlist(
         self,
@@ -22,16 +24,18 @@ class PlaylistService:
             name=data.name,
             songs=[
                 PlaylistSong(
-                    title=song.title,
-                    artist=song.artist,
-                    reason=song.reason,
-                    duration=song.duration,
-                    url=song.url,
+                    title=song.Title,
+                    artist=song.Artist,
+                    reason=song.Reason,
+                    duration=song.Duration,
+                    url=song.AudioUrl,
                     position=index,
                 )
                 for index, song in enumerate(data.songs)
             ],
         )
+        # saving to aws saved state
+        self.s3.move_session_to_saved(data.session_id)
 
         return self.repo.create(db, playlist)
 

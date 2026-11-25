@@ -23,4 +23,5 @@ dependencies = [
   "langchain>=1.4.9",
   "pytube>=15.0.0",
   "mutagen>=1.48.1",
+  "requests>=2.34.2",
 ]

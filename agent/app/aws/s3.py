@@ -1,7 +1,9 @@
 import os
 from pathlib import Path
+from sys import prefix
 
 import boto3
+from botocore.retries.adaptive import bucket
 from dotenv import load_dotenv
 from mutagen.mp3 import MP3
 
@@ -70,41 +72,34 @@ class S3:
         src_prefix = f"not_saved/{session_id}"
         dst_prefix = f"saved/{session_id}"
 
-        response = self.client.list_objects_v2(
-            Bucket=self.bucket_name,
-            Prefix=src_prefix,
-        )
+        paginator = self.client.get_paginator("list_objects_v2")
 
-        objects = response.get("Contents", [])
+        source_keys = []
 
-        if not objects:
+        for page in paginator.paginate(
+            bucket=self.bucket_name,
+            prefix=src_prefix,
+        ):
+            for obj in page.get("Content", []):
+                source_keys.append(obj["Key"])
+
+        if not source_keys:
             return []
-
-        # Copy first, then delete the orginals.
         moved_keys = []
 
-        for obj in objects:
-            src_key = obj["key"]
-
-            if src_prefix == src_key:
-                continue
-
-            destination_key = destination_key + src_key[len(src_prefix) :]
+        for src_key in source_keys:
+            destination_key = dst_prefix + src_key[len(src_prefix) :]
 
             self.client.copy_object(
-                Bucket=self.bucket_name,
-                Key=destination_key,
-                CopySource={
-                    "Bucket": self.bucket_name,
-                    "Key": src_key,
-                },
+                bucket=self.bucket_name,
+                key=destination_key,
+                copysource={"Bucket": self.bucket_name, "Key": src_key},
             )
 
             moved_keys.append(destination_key)
-
             # Delete the orginals only after all copies succeed.
             if moved_keys:
-                self.client.delete_objects(
+                response = self.client.delete_objects(
                     Bucket=self.bucket_name,
                     Delete={
                         "Objects": [
@@ -114,7 +109,11 @@ class S3:
                         "Quiet": True,
                     },
                 )
-            return moved_keys
+            if response.get("Errors"):
+                raise RuntimeError(
+                    f"Some original S3 objects could not be deleted: {response['Errors']}"
+                )
+        return moved_keys
 
 
 s3 = S3()

@@ -7,3 +7,4 @@ yt_dlp
 boto3
 pylast
 mutagen
+requests

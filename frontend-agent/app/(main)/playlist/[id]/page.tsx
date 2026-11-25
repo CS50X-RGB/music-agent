@@ -51,7 +51,6 @@ export default function Playlist() {
   });
   useEffect(() => {
     if (data) {
-      console.log(data);
       setPlaylistName(data.playlist_name);
       setSongs(data.songs);
     }
@@ -102,8 +101,6 @@ export default function Playlist() {
                 <span className="text-[#A8ADA3]">·</span>
 
                 <span className="text-[#A8ADA3]">{songs.length} songs</span>
-
-                <Heart size={20} onClick={() => likePlaylist.mutate()} />
                 <span className="text-[#A8ADA3]">·</span>
 
                 <span className="text-[#A8ADA3]">ID: {playlistId}</span>
@@ -121,7 +118,7 @@ export default function Playlist() {
             >
               {isPlaylistSong && isPlaying ? <FaPause /> : <FaPlay className="ml-1" />}
             </button>
-
+            <Heart size={20} onClick={() => likePlaylist.mutate()} />
             <button
               aria-label="More playlist options"
               className="text-2xl text-[#A8ADA3] transition hover:text-white"
