@@ -1,6 +1,7 @@
 "use client";
 
 import PlaylistCard from "@/components/card/page";
+import { PlaylistCardType } from "@/context/PlaylistType";
 import { getData } from "@/core/api/apiHandler";
 import { accountRoutes, playlistRouter } from "@/core/api/apiRoutes";
 import { Button, Skeleton } from "@heroui/react";
@@ -77,7 +78,6 @@ export default function Dashboard() {
           </h2>
           <p>Here is what is new for you.</p>
         </div>
-
         <div className="flex flex-col gap-2 bg-linear-to-tr from-[rgb(199,243,107)] to-black rounded-2xl p-6">
           <h3 className="text-xl font-bold">Create a New Playlist</h3>
           <p>
@@ -88,17 +88,27 @@ export default function Dashboard() {
             Generate Playlist -&gt;
           </Button>
         </div>
-
         <div className="flex flex-row justify-between p-4">
           <h1 className="text-2xl font-bold">Your Playlists</h1>
           <p>View All</p>
         </div>
-
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <PlaylistCard key={i} />
-          ))}
-        </div>
+          {getProfilePlaylist?.data.length === 0 ? (
+            <div className="col-span-full flex flex-col items-center gap-3 py-10">
+              <p className="text-gray-400">No playlists yet.</p>
+              <button
+                onClick={() => router.push("/generate")}
+                className="rounded-lg bg-[#C7F36B] px-5 py-2 font-medium text-black"
+              >
+                + Create Playlist
+              </button>
+            </div>
+          ) : (
+            getProfilePlaylist?.data.map((playlist: PlaylistCardType, i: number) => (
+              <PlaylistCard key={playlist.name ?? i} card={playlist} />
+            ))
+          )}
+        </div>{" "}
       </>
     );
   }
