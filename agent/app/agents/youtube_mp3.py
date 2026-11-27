@@ -124,7 +124,7 @@ def download_audio_batch(songs, output_directory="temp"):
                 f"MP3 not found: {mp3_path}\n"
                 f"Downloaded files: {list(output_directory.iterdir())}"
             )
-        add_thumbnail(str(mp3_path), info)
+        add_thumbnail(str(mp3_path), info["thumbnail"])
         # Step 4: Upload to S3
         object_key = s3.upload_mp3(
             session_id=session_id,

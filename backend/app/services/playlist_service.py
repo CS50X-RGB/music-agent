@@ -26,6 +26,7 @@ class PlaylistService:
             songs=[
                 PlaylistSong(
                     title=song.Title,
+                    album_cover=song.album_cover,
                     artist=song.Artist,
                     reason=song.Reason,
                     duration=song.Duration,

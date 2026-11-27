@@ -5,6 +5,7 @@ export type Song = {
   Reason: string;
   Duration: string;
   AudioUrl: string;
+  album_cover?: string;
 };
 
 export type MusicPlayerContextType = {

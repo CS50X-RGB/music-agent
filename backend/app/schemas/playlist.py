@@ -10,6 +10,7 @@ class PlaylistSongCreate(BaseModel):
     Reason: str
     Duration: str
     AudioUrl: str | None = None
+    album_cover: str | None = None
 
 
 class PlaylistCreate(BaseModel):

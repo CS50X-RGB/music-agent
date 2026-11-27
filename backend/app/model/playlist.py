@@ -67,7 +67,7 @@ class PlaylistSong(Base):
     title: Mapped[str] = mapped_column(String(300), nullable=False)
 
     artist: Mapped[str] = mapped_column(String(300), nullable=False)
-
+    album_cover: Mapped[str] = mapped_column(Text, nullable=True)
     reason: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     url: Mapped[str | None] = mapped_column(Text, nullable=False)

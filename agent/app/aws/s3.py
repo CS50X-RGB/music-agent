@@ -48,7 +48,7 @@ class S3:
         )
         return object_key
 
-    def get_playback_url(self, object_key: str, expires_in: int = 900) -> str:
+    def get_playback_url(self, object_key: str, expires_in: int = 3600) -> str:
         """Generate a temp URL for a playing an S3 object."""
 
         if not 1 <= expires_in <= 604800:

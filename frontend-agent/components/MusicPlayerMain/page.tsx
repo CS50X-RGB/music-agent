@@ -64,12 +64,17 @@ export default function MusicPlayerMain({ songs }: { songs: Song[] }) {
     <footer className="fixed bottom-0 left-0 z-50 w-full border-t border-[#343A31] bg-[#141714]/95 px-4 py-3 text-[#F4F5F0] backdrop-blur-xl rounded-full md:px-6">
       <div className="mx-auto grid max-w-screen-2xl grid-cols-[0.5fr_1fr] items-center gap-4 md:grid-cols-[1fr_1.5fr_1fr]">
         <div className="flex min-w-0 items-center gap-3">
-          <div
-            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-[#C7F36B] to-[#30392a] text-2xl text-[#090B0A] ${isPlayling ? "animate-spin rounded-full" : ""}`}
-          >
-            ♫
-          </div>
-
+          {currentSong.album_cover ? (
+            <img
+              src={currentSong.album_cover}
+              alt={currentSong.Title}
+              className="h-12 w-12 shrink-0 rounded-md object-cover"
+            />
+          ) : (
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-linear-to-br from-[#30392a] to-[#151914] text-xl text-[#C7F36B]">
+              ♫
+            </div>
+          )}
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold">{currentSong.Title}</p>
             <p className="truncate text-xs text-[#A8ADA3]">{currentSong.Artist}</p>

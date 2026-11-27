@@ -46,7 +46,11 @@ export default function Playlist() {
   const likePlaylist = useMutation({
     mutationKey: ["like", playlistId],
     mutationFn: async () => {
-      return await postData(playlistRouter.like, {}, { name: playlistName, songs });
+      return await postData(
+        playlistRouter.like,
+        {},
+        { name: playlistName, songs, session_id: playlistId },
+      );
     },
   });
   useEffect(() => {
@@ -168,10 +172,17 @@ export default function Playlist() {
                       </button>
                     </div>
                     <div className="flex min-w-0 items-center gap-3">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-linear-to-br from-[#30392a] to-[#151914] text-xl text-[#C7F36B]">
-                        ♫
-                      </div>
-
+                      {song.album_cover ? (
+                        <img
+                          src={song.album_cover}
+                          alt={song.Title}
+                          className="h-12 w-12 shrink-0 rounded-md object-cover"
+                        />
+                      ) : (
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-linear-to-br from-[#30392a] to-[#151914] text-xl text-[#C7F36B]">
+                          ♫
+                        </div>
+                      )}
                       <div className="min-w-0">
                         <p
                           className={`truncate font - medium transition ${
